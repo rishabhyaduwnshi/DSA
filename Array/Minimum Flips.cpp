@@ -14,6 +14,9 @@ void minimumFlips(int array[], int size)
                 cout<<(i-1)<<"\n";
         }
     }
+    
+    if(array[size-1] != array[0])
+        cout<<(size-1)<<"\n";
 }
 
 
