@@ -8,6 +8,9 @@ void findUniqueElements(int array[], int size)
     for(int i=0;i<size;i++)
     us.insert(array[i]);
     
+    //other way of inserting could be
+    //us.insert(array,array+size);
+    
     cout<<us.size();
 }
 
