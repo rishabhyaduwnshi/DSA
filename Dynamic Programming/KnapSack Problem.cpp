@@ -1,36 +1,33 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int dp[1000][1000];
+int memoized_array[1001][1001];
 
-
-int knapsackProblem(int weight[], int profit[], int length, int capacity)
+int knapSack(int weight[], int profit[],int capacity, int size)
 {
-    if(length == 0 || capacity == 0)
+    if(capacity == 0 || size == 0)
         return 0;
     
-    if(dp[capacity][length-1] != -1)
-        return dp[capacity][length-1];
-    
-        
-    if(weight[length-1] <= capacity)
-        return dp[capacity][length-1] = max(profit[length-1]+knapsackProblem(weight,profit,length-1,capacity-weight[length-1]),
-                                    knapsackProblem(weight,profit,length-1,capacity));
-                                    
-    return knapsackProblem(weight,profit,length-1,capacity);
+    if(memoized_array[capacity][size] == -1)
+    {
+        if(capacity >= weight[size-1])
+        return memoized_array[capacity][size] =  max(profit[size-1] + knapSack(weight,profit, capacity-weight[size-1],size-1),
+                                    knapSack(weight,profit,capacity,size-1));
+        else
+            return memoized_array[capacity][size] = knapSack(weight,profit,capacity,size-1);
+    }
+    else
+        return memoized_array[capacity][size];
 }
-
 
 
 int main()
 {
-    memset(dp,-1,sizeof(dp));
-    
-	int profit[] = { 60, 100, 120, 300, 25 };
-	int weight[] = { 10, 20, 30, 40, 50 };
-    
-    int size = sizeof(weight)/sizeof(int);
-    int capacity = 100;
-    
-    cout<<knapsackProblem(weight,profit,size,capacity);
+    memset(memoized_array,-1,sizeof(memoized_array));
+    int profit[] = { 60, 100, 120 };
+    int weight[] = { 10, 20, 30 };
+    int capacity = 50;
+    int size = sizeof(profit) / sizeof(profit[0]);
+    cout << knapSack(weight, profit, capacity, size);
+    return 0;
 }
