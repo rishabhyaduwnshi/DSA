@@ -28,6 +28,6 @@ int main()
     int sum = 2;
     int size = sizeof(array)/sizeof(int);
     vector<int> result;
-    printSubsequences(array,0,size,0,2,result);
+    printSubsequences(array,0,size,0,sum,result);
     
 }
