@@ -45,7 +45,7 @@ bool isSafe(int board[N][N], int row, int col)
 	row_copy = row; 
 	col_copy = col;
 	
-	while(row_copy >= 0 && col_copy >= 0)
+	while(row_copy < N && col_copy >= 0)
 	{
 	    if(board[row_copy][col_copy] == 1)
 	        return false;
