@@ -37,6 +37,33 @@ class LinkedLisT
        }
     }
     
+    public void deleteNodeFromFront()
+    {
+        if(head_node == null)
+            return;
+        
+        Node temp_node = new Node();
+        temp_node = head_node;
+        
+        head_node = head_node.next_node;
+        temp_node = null;
+    }
+    
+    public void deleteNodeFromLast()
+    {
+        if(last_node == null)
+            return;
+            
+        Node temp_node = new Node();
+        temp_node = head_node;
+        
+        while(temp_node.next_node.next_node != null)
+            temp_node = temp_node.next_node;
+        
+        temp_node.next_node = null;
+        last_node = temp_node;
+    }
+    
     public void printList()
     {
         Node temp_node = head_node;
@@ -45,6 +72,8 @@ class LinkedLisT
             System.out.print(temp_node.node_data + " ");
             temp_node = temp_node.next_node;
         }
+        
+        System.out.print("\n");
     }
 }
 
@@ -58,6 +87,33 @@ class Main
         l1.insertNode(15);
         l1.insertNode(25);
         l1.insertNode(35);
+        l1.insertNode(45);
+        l1.insertNode(55);
+        l1.insertNode(65);
+        
+        System.out.println("List Initially...");
         l1.printList();
+        System.out.print("\n");
+        
+        System.out.println("After Deleting First Element..");
+        l1.deleteNodeFromFront();
+        l1.printList();
+        System.out.print("\n");
+        
+        System.out.println("After Deleting Last Element..");
+        l1.deleteNodeFromLast();
+        l1.printList();
+        System.out.print("\n");
+        
+        System.out.println("After Deleting First Element..");
+        l1.deleteNodeFromFront();
+        l1.printList();
+        System.out.print("\n");
+        
+        System.out.println("After Deleting Last Element..");
+        l1.deleteNodeFromLast();
+        l1.printList();
+        System.out.print("\n");
+        
     }
 }
