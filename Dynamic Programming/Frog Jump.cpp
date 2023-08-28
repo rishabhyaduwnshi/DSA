@@ -1,3 +1,25 @@
+//bottom_up approch
+int minimumEnergy(vector<int>& height, int n) 
+{
+    vector<int> results(n,0);
+    results[0] = 0;
+        
+    for(int i=1;i<n;i++)
+    {
+        int enery_for_first_step  = results[i-1]+abs(height[i]-height[i-1]);
+        int enery_for_second_step = INT_MAX;
+            
+        if(i>1)
+            enery_for_second_step = results[i-2]+abs(height[i]-height[i-2]);
+        results[i] = min(enery_for_first_step,enery_for_second_step);
+    }
+        
+    return results[n-1];
+}
+
+
+
+//recursive solution
 int minEnergy(vector<int>& height, int n, vector<int> &results) 
 {
     if(n == 0)
