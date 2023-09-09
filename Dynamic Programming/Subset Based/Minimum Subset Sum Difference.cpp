@@ -1,6 +1,9 @@
 int findMinimumDifference(int array[], int size, int current_sum, int total_sum, vector<vector<int>> &results)
 {
     if(size == 0)
+    {
+	// total_sum-current_sum is the sum of the subset that is not included
+	// current_sum is the sum of subset that is included
         return abs((total_sum-current_sum) - current_sum);
         
     if(results[size][current_sum] != -1)
