@@ -1,43 +1,41 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int partition(int array[], int low, int high)
 {
     int pivot = array[low];
     int i = low;
-    int j = high;
-    
+    int j = high + 1;  // Start `j` at `high + 1` for proper decrement
+
     do
     {
-        do{i++;}while(array[i] <= pivot);
-        do{j--;}while(array[j] > pivot);
-        
-        if(i<j)
-            swap(array[i],array[j]);
-    }
-    while(i<j);
-    swap(array[low],array[j]);
+        do { i++; } while (i <= high && array[i] <= pivot);  // Increment `i` until finding an element greater than the pivot or reaching the end
+        do { j--; } while (array[j] > pivot);                // Decrement `j` until finding an element less than or equal to the pivot
+
+        if (i < j)
+            swap(array[i], array[j]);                        // Swap elements if `i` is still less than `j`
+    } while (i < j);
     
-    return j;
+    swap(array[low], array[j]);  // Place the pivot in the correct position
+    return j;  // Return the index of the pivot
 }
 
-void quickSort(int array[], int low, int high)
+void quick_sort(int array[], int low, int high)
 {
-    int j;
-    if(low < high)
+    if (low < high)
     {
-        j = partition(array,low,high);
-        quickSort(array,low,j);
-        quickSort(array,j+1,high);
+        int j = partition(array, low, high);
+        quick_sort(array, low, j - 1);
+        quick_sort(array, j + 1, high);
     }
 }
-
 
 int main()
 {
-    int array[] = {2,1,3,12,8,6,9,4,5,7,13,0,INT_MAX};
-    int size = sizeof(array)/sizeof(int);
-    quickSort(array,0,size-1);
-    for(int i=0;i<size-1;i++)
-        cout<<array[i]<<" ";
+    int array[] = {1, 2, 5, 3, 6, 4, 10, 9, 8, 7};
+    int size = sizeof(array) / sizeof(int);
+    quick_sort(array, 0, size - 1);
+    
+    for (int i = 0; i < size; i++)
+        cout << array[i] << " ";
 }
